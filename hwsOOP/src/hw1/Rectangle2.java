@@ -144,5 +144,9 @@ public class Rectangle2 implements Rectangle{
 		// TODO Auto-generated method stub
 		return false;
 	}
+	
+	public void checkin() {
+		System.out.println("it's working!");
+	}
 
 }
