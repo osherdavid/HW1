@@ -147,6 +147,7 @@ public class Rectangle2 implements Rectangle{
 	
 	public void checkin() {
 		System.out.println("it's working!");
+		System.out.println("boolbool");
 	}
 
 }
