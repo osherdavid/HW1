@@ -1,23 +1,23 @@
 package hw1;
 
-public class Rectangle2 implements Rectangle{
+import com.sun.javafx.geom.Rectangle;
+
+import javafx.scene.effect.Light.Point;
+
+public class Rectangle2 implements Rectangle {
 	double height;
 	double width;
 	Point bottom_left;
-	
-	
-	public Rectangle2()
-	{
+
+	public Rectangle2() {
 		this.height = 1;
 		this.width = 1;
-		this.bottom_left = new Point(-0.5,-0.5);
+		this.bottom_left = new Point(-0.5, -0.5);
 	}
-	
-	public Rectangle2(double height, double width, Point bottom_left)
-	{
+
+	public Rectangle2(double height, double width, Point bottom_left) {
 		this();
-		if(height > 0 && width > 0)
-		{
+		if (height > 0 && width > 0) {
 			this.height = height;
 			this.width = width;
 			this.bottom_left = bottom_left.copy();
@@ -41,8 +41,8 @@ public class Rectangle2 implements Rectangle{
 	@Override
 	public Point getCenter() {
 		Point center = new Point(this.bottom_left);
-		center.moveHorizontal(width/2);
-		center.moveVertical(height/2);
+		center.moveHorizontal(width / 2);
+		center.moveVertical(height / 2);
 		return center;
 	}
 
@@ -63,91 +63,91 @@ public class Rectangle2 implements Rectangle{
 
 	@Override
 	public void setTopRightPoint(Point p) {
-		if (p.getX()>this.bottom_left.getX() && p.getY()>this.bottom_left.getY())
-		{
-			this.height = p.getY()-this.bottom_left.getY();
-			this.width = p.getX()-this.bottom_left.getX();
-		}
+		// if (p.getX()>this.bottom_left.getX() && p.getY()>this.bottom_left.getY())
+		this.bottom_left.setX(p.getX() - this.width);
+		this.bottom_left.setY(p.getY() - this.height);
 	}
 
 	@Override
 	public void setCenter(Point p) {
-		if (p.getX()>this.bottom_left.getX() && p.getY()>this.bottom_left.getY())
-		{
-			this.height = p.getY()-this.bottom_left.getY();
-			this.width = p.getX()-this.bottom_left.getX();
-		}
+		// if (p.getX() > this.bottom_left.getX() && p.getY() > this.bottom_left.getY())
+		// {
+		this.bottom_left.setX(p.getX() - this.width / 2);
+		this.bottom_left.setY(p.getY() - this.height / 2);
 	}
 
 	@Override
 	public void setHeight(double height) {
-		// TODO Auto-generated method stub
-		
+		if (height >= 0) {
+			this.height = height;
+		}
 	}
 
 	@Override
 	public void setWidth(double width) {
-		// TODO Auto-generated method stub
-		
+		if (width >= 0) {
+			this.width = width;
+		}
 	}
 
 	@Override
 	public double getArea() {
-		// TODO Auto-generated method stub
-		return 0;
+		return (this.height * this.width)
 	}
 
 	@Override
 	public double getPerimeter() {
-		// TODO Auto-generated method stub
-		return 0;
+		return this.height * 2 + this.width * 2;
 	}
 
 	@Override
 	public void rotate() {
-		// TODO Auto-generated method stub
-		
+		double temp;
+		temp = this.height;
+		this.height = this.width;
+		this.width
 	}
 
 	@Override
 	public void scale(double scalePar) {
-		// TODO Auto-generated method stub
-		
+		this.height *= scalePar;
+		this.width *= scalePar;
 	}
 
 	@Override
 	public void moveVertical(double delta) {
-		// TODO Auto-generated method stub
-		
+		this.bottom_left.moveVertical(delta);
 	}
 
 	@Override
 	public void moveHorizontal(double delta) {
-		// TODO Auto-generated method stub
-		
+		this.bottom_left.moveHorizontal(delta);
 	}
 
 	@Override
 	public boolean isEqual(Rectangle rect) {
-		// TODO Auto-generated method stub
+		if(this.height == rect.height && this.width == rect.width && this.bottom_left.isEqual(rect.bottom_left))
+		{
+			return true;
+		}
 		return false;
 	}
 
 	@Override
 	public boolean contains(Point p) {
-		// TODO Auto-generated method stub
+		if(p.isUpper(this.bottom_left)&& p.getY()<this.bottom_left+this.height && p.isRight(this.bottom_left) && p.getX()<this.bottom_left+this.width)
+		{
+			return true
+		}
 		return false;
 	}
 
 	@Override
 	public boolean contains(Rectangle rect) {
-		// TODO Auto-generated method stub
+		if(this.contains(rect.bottom_left) && rect.botoom_left.getX()+rect.width < this.bottom_left.getX()+this.width && rect.bottom_left.getY()+rect.height<this.bottom_left.getY()+this.height)
+		{
+			return true;
+		}
 		return false;
 	}
-	
-	public void checkin() {
-		System.out.println("it's working!");
-		System.out.println("boolbool");
-	}
-
 }
